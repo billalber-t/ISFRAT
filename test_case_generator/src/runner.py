@@ -3,10 +3,12 @@
 # import requests
 # from collections import defaultdict
 # from urllib.parse import urljoin
+# from pathlib import Path
 
 # API_BASE_URL = "http://localhost:5000"  # adjust if needed
+# OUTPUT_DIR = Path(__file__).resolve().parent.parent / "outputs"
 
-# def load_test_cases(filepath="generated_test_cases.json"):
+# def load_test_cases(filepath=OUTPUT_DIR / "generated_test_cases.json"):
 #     with open(filepath) as f:
 #         return json.load(f)
 
@@ -71,10 +73,10 @@
 #     return metrics
 
 # def save_metrics(metrics):
-#     with open("metrics_report.json", "w") as f:
+#     with open(OUTPUT_DIR / "metrics_report.json", "w") as f:
 #         json.dump(metrics, f, indent=2)
 
-#     with open("metrics_report.csv", "w", newline="") as csvfile:
+#     with open(OUTPUT_DIR / "metrics_report.csv", "w", newline="") as csvfile:
 #         writer = csv.writer(csvfile)
 #         writer.writerow(["Metric", "Value"])
 #         for k, v in metrics.items():
@@ -85,6 +87,8 @@
 #                 writer.writerow([k, v])
 
 # def main():
+#     OUTPUT_DIR.mkdir(exist_ok=True)
+
 #     test_cases = load_test_cases()
 #     results = []
 
@@ -101,10 +105,10 @@
 #         }
 #         results.append(result)
 
-#     with open("test_results.json", "w") as f:
+#     with open(OUTPUT_DIR / "test_results.json", "w") as f:
 #         json.dump(results, f, indent=2)
 
-#     print("\n✅ Test execution complete. Results saved to test_results.json")
+#     print("\n✅ Test execution complete. Results saved to outputs/test_results.json")
 
 #     metrics = compute_metrics(test_cases, results)
 #     save_metrics(metrics)
@@ -115,7 +119,7 @@
 #     print(f"- Success rate: {metrics['success_rate_percent']:.2f}%")
 #     print(f"- Failure rate: {metrics['failure_rate_percent']:.2f}%")
 #     print(f"- Diversity (unique params): {metrics['diversity_score']}")
-#     print("\n📁 Metrics report written to metrics_report.json and metrics_report.csv")
+#     print("\n📁 Metrics report written to outputs/metrics_report.json and outputs/metrics_report.csv")
 
 # if __name__ == "__main__":
 #     main()
@@ -128,12 +132,42 @@ from collections import defaultdict
 from urllib.parse import urljoin
 from pathlib import Path
 
-API_BASE_URL = "http://localhost:5000"  # adjust if needed
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "outputs"
+TEST_CASES_FILE = OUTPUT_DIR / "generated_test_cases.json"
 
-def load_test_cases(filepath=OUTPUT_DIR / "generated_test_cases.json"):
+API_BASE_URL = "http://localhost:5000"  # adjust if needed
+
+# 🪪 Configurable auth
+config = {
+    "auth_method": "none",  # options: none, api_key, bearer_token, basic
+    "api_key": "your-api-key-here",
+    "bearer_token": "your-jwt-or-oauth-token-here",
+    "basic_username": "your-username",
+    "basic_password": "your-password"
+}
+
+
+def get_auth_headers():
+    """
+    Return the appropriate auth headers based on config.
+    """
+    if config["auth_method"] == "none":
+        return {}
+    elif config["auth_method"] == "api_key":
+        return {"Authorization": f"Api-Key {config['api_key']}"}
+    elif config["auth_method"] == "bearer_token":
+        return {"Authorization": f"Bearer {config['bearer_token']}"}
+    elif config["auth_method"] == "basic":
+        # Basic Auth is handled differently — see below
+        return {}
+    else:
+        raise ValueError(f"Unsupported auth_method: {config['auth_method']}")
+
+
+def load_test_cases(filepath=TEST_CASES_FILE):
     with open(filepath) as f:
         return json.load(f)
+
 
 def execute_test_case(test_case):
     method = test_case["method"]
@@ -141,15 +175,21 @@ def execute_test_case(test_case):
     payload = test_case["payload"]
     url = urljoin(API_BASE_URL, endpoint)
 
+    headers = get_auth_headers()
+    auth = None
+
+    if config["auth_method"] == "basic":
+        auth = (config["basic_username"], config["basic_password"])
+
     try:
         if method == "GET":
-            response = requests.get(url, params=payload)
+            response = requests.get(url, params=payload, headers=headers, auth=auth)
         elif method == "POST":
-            response = requests.post(url, json=payload)
+            response = requests.post(url, json=payload, headers=headers, auth=auth)
         elif method == "PUT":
-            response = requests.put(url, json=payload)
+            response = requests.put(url, json=payload, headers=headers, auth=auth)
         elif method == "DELETE":
-            response = requests.delete(url, json=payload)
+            response = requests.delete(url, json=payload, headers=headers, auth=auth)
         else:
             print(f"Unsupported method: {method}")
             return None
@@ -157,6 +197,7 @@ def execute_test_case(test_case):
     except Exception as e:
         print(f"Request failed: {e}")
         return None
+
 
 def compute_metrics(test_cases, results):
     metrics = {}
@@ -195,7 +236,10 @@ def compute_metrics(test_cases, results):
 
     return metrics
 
+
 def save_metrics(metrics):
+    OUTPUT_DIR.mkdir(exist_ok=True)
+
     with open(OUTPUT_DIR / "metrics_report.json", "w") as f:
         json.dump(metrics, f, indent=2)
 
@@ -208,6 +252,7 @@ def save_metrics(metrics):
                     writer.writerow([f"{k}.{subk}", subv])
             else:
                 writer.writerow([k, v])
+
 
 def main():
     OUTPUT_DIR.mkdir(exist_ok=True)
@@ -243,6 +288,7 @@ def main():
     print(f"- Failure rate: {metrics['failure_rate_percent']:.2f}%")
     print(f"- Diversity (unique params): {metrics['diversity_score']}")
     print("\n📁 Metrics report written to outputs/metrics_report.json and outputs/metrics_report.csv")
+
 
 if __name__ == "__main__":
     main()
