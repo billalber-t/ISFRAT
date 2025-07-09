@@ -1,32 +1,75 @@
+# from utils import load_api_spec
+# from generator import build_test_case
+# import json
+
+# # Load API specification
+# spec = load_api_spec("specs/api_spec.yaml")
+
+# paths = spec['paths']
+# all_test_cases = []
+
+# for path, methods in paths.items():
+#     for method, details in methods.items():
+#         parameters = details.get('parameters', [])
+#         print(f"Generating test cases for {method.upper()} {path}")
+
+#         cases = build_test_case(path, method, parameters)
+#         all_test_cases.extend([
+#             {
+#                 "endpoint": path,
+#                 "method": method.upper(),
+#                 "type": c["type"],
+#                 "payload": c["payload"]
+#             }
+#             for c in cases
+#         ])
+
+# # Save test cases to JSON file
+# with open("generated_test_cases.json", "w") as f:
+#     json.dump(all_test_cases, f, indent=2)
+
+# print("✅ Test cases generated and saved to generated_test_cases.json")
+
+
 from utils import load_api_spec
 from generator import build_test_case
 import json
+from pathlib import Path
 
-# Load API specification
-spec = load_api_spec("specs/api_spec.yaml")
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "outputs"
+SPEC_PATH = Path(__file__).resolve().parent.parent / "specs" / "api_spec.yaml"
 
-paths = spec['paths']
-all_test_cases = []
+def main():
+    OUTPUT_DIR.mkdir(exist_ok=True)
 
-for path, methods in paths.items():
-    for method, details in methods.items():
-        parameters = details.get('parameters', [])
-        print(f"Generating test cases for {method.upper()} {path}")
+    # Load API specification
+    spec = load_api_spec(SPEC_PATH)
 
-        cases = build_test_case(path, method, parameters)
-        all_test_cases.extend([
-            {
-                "endpoint": path,
-                "method": method.upper(),
-                "type": c["type"],
-                "payload": c["payload"]
-            }
-            for c in cases
-        ])
+    paths = spec['paths']
+    all_test_cases = []
 
-# Save test cases to JSON file
-with open("generated_test_cases.json", "w") as f:
-    json.dump(all_test_cases, f, indent=2)
+    for path, methods in paths.items():
+        for method, details in methods.items():
+            parameters = details.get('parameters', [])
+            print(f"Generating test cases for {method.upper()} {path}")
 
-print("✅ Test cases generated and saved to generated_test_cases.json")
+            cases = build_test_case(path, method, parameters)
+            all_test_cases.extend([
+                {
+                    "endpoint": path,
+                    "method": method.upper(),
+                    "type": c["type"],
+                    "payload": c["payload"]
+                }
+                for c in cases
+            ])
 
+    # Save test cases to JSON file
+    output_file = OUTPUT_DIR / "generated_test_cases.json"
+    with open(output_file, "w") as f:
+        json.dump(all_test_cases, f, indent=2)
+
+    print(f"✅ Test cases generated and saved to {output_file}")
+
+if __name__ == "__main__":
+    main()
