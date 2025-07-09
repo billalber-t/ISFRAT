@@ -1,0 +1,34 @@
+[
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "page": 64
+    }
+  },
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "page": "invalid"
+    }
+  },
+  {
+    "endpoint": "/users/{id}",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "id": 68
+    }
+  },
+  {
+    "endpoint": "/users/{id}",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "id": "invalid"
+    }
+  }
+]

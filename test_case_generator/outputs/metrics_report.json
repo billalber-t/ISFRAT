@@ -1,0 +1,14 @@
+{
+  "total_endpoints": 2,
+  "total_test_cases": 4,
+  "success_count": 0,
+  "failure_count": 4,
+  "success_rate_percent": 0.0,
+  "failure_rate_percent": 100.0,
+  "diversity_score": 2,
+  "endpoint_success": {},
+  "endpoint_failure": {
+    "/users": 2,
+    "/users/{id}": 2
+  }
+}

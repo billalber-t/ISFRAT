@@ -1,0 +1,54 @@
+[
+  {
+    "test_case": {
+      "endpoint": "/users",
+      "method": "GET",
+      "type": "valid",
+      "payload": {
+        "page": 64
+      }
+    },
+    "status_code": null,
+    "response_time_ms": null,
+    "response_body": null
+  },
+  {
+    "test_case": {
+      "endpoint": "/users",
+      "method": "GET",
+      "type": "invalid",
+      "payload": {
+        "page": "invalid"
+      }
+    },
+    "status_code": null,
+    "response_time_ms": null,
+    "response_body": null
+  },
+  {
+    "test_case": {
+      "endpoint": "/users/{id}",
+      "method": "GET",
+      "type": "valid",
+      "payload": {
+        "id": 68
+      }
+    },
+    "status_code": null,
+    "response_time_ms": null,
+    "response_body": null
+  },
+  {
+    "test_case": {
+      "endpoint": "/users/{id}",
+      "method": "GET",
+      "type": "invalid",
+      "payload": {
+        "id": "invalid"
+      }
+    },
+    "status_code": null,
+    "response_time_ms": null,
+    "response_body": null
+  }
+]
