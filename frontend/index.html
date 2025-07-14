@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISFRAT | Intelligent API Testing</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f9fc;
+    color: #333;
+}
+header {
+    background: #2a4d69;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+}
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+h2 {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #2a4d69;
+}
+section {
+    margin-bottom: 2rem;
+}
+label {
+    display: block;
+    margin: 0.5rem 0;
+}
+input[type="file"] {
+    display: block;
+    margin-top: 0.5rem;
+}
+button {
+    background: #4b86b4;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+button:hover {
+    background: #3f729b;
+}
+pre {
+    background: #eee;
+    padding: 1rem;
+    overflow-x: auto;
+    border-radius: 4px;
+    max-height: 300px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>ISFRAT </h1> 
+    <!-- — Intelligent Software Framework for API Testing -->
+</header>
+
+<main>
+    <section>
+        <h2>📄 Upload API Specification (.yaml)</h2>
+        <input type="file" id="specFile" accept=".yaml" />
+        <button onclick="uploadSpec()">Upload Spec</button>
+    </section>
+
+    <section>
+        <h2>🚀 Run Tests</h2>
+        <label><input type="checkbox" id="tcg" checked /> Test Case Generation</label>
+        <label><input type="checkbox" id="adm" checked /> Anomaly Detection</label>
+        <label><input type="checkbox" id="sam" checked /> Security Analysis</label>
+        <button onclick="runTests()">Run Selected Tests</button>
+    </section>
+
+    <section>
+        <h2>📊 Results</h2>
+        <pre id="results">No results yet.</pre>
+    </section>
+</main>
+
+<script>
+const API_BASE = "http://127.0.0.1:8448";
+
+async function uploadSpec() {
+    const fileInput = document.getElementById("specFile");
+    const file = fileInput.files[0];
+    if (!file) {
+        alert("Please select a .yaml file.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    document.getElementById("results").textContent = "Uploading spec...";
+
+    const response = await fetch(`${API_BASE}/upload-spec`, {
+        method: "POST",
+        body: formData
+    });
+
+    const result = await response.json();
+    document.getElementById("results").textContent = JSON.stringify(result, null, 2);
+}
+
+async function runTests() {
+    const formData = new URLSearchParams();
+    formData.append("tcg", document.getElementById("tcg").checked);
+    formData.append("adm", document.getElementById("adm").checked);
+    formData.append("sam", document.getElementById("sam").checked);
+
+    document.getElementById("results").textContent = "Running tests...";
+
+    const response = await fetch(`${API_BASE}/run-tests`, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formData
+    });
+
+    const result = await response.json();
+    document.getElementById("results").textContent = JSON.stringify(result, null, 2);
+}
+</script>
+
+</body>
+</html>
