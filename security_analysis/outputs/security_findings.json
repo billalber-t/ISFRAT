@@ -4,7 +4,7 @@
     "method": "GET",
     "parameter": "page",
     "malicious_payload": "' OR '1'='1",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105fb8dc0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%27+OR+%271%27%3D%271&size=6 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102f76fa0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
@@ -12,7 +12,7 @@
     "method": "GET",
     "parameter": "page",
     "malicious_payload": "<script>alert(1)</script>",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105fe7850>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%3Cscript%3Ealert%281%29%3C%2Fscript%3E&size=6 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0a90>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
@@ -20,7 +20,7 @@
     "method": "GET",
     "parameter": "page",
     "malicious_payload": "`rm -rf /`",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105ff0250>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%60rm+-rf+%2F%60&size=6 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808490>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
@@ -28,7 +28,39 @@
     "method": "GET",
     "parameter": "page",
     "malicious_payload": "../../../../etc/passwd",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105ff0c10>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=..%2F..%2F..%2F..%2Fetc%2Fpasswd&size=6 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0f40>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "parameter": "size",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=94&size=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0490>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "parameter": "size",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=94&size=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102f4b4c0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "parameter": "size",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=94&size=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808e50>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "parameter": "size",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=94&size=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038147f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
@@ -36,7 +68,7 @@
     "method": "GET",
     "parameter": "page",
     "malicious_payload": "' OR '1'='1",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105ffa5b0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%27+OR+%271%27%3D%271&size=invalid (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102f76a00>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
@@ -44,7 +76,7 @@
     "method": "GET",
     "parameter": "page",
     "malicious_payload": "<script>alert(1)</script>",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105ff0460>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%3Cscript%3Ealert%281%29%3C%2Fscript%3E&size=invalid (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808070>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
@@ -52,7 +84,7 @@
     "method": "GET",
     "parameter": "page",
     "malicious_payload": "`rm -rf /`",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105fe7a60>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=%60rm+-rf+%2F%60&size=invalid (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808af0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
@@ -60,71 +92,615 @@
     "method": "GET",
     "parameter": "page",
     "malicious_payload": "../../../../etc/passwd",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105f75490>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=..%2F..%2F..%2F..%2Fetc%2Fpasswd&size=invalid (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0a90>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
-    "endpoint": "/users/{id}",
+    "endpoint": "/users",
     "method": "GET",
-    "parameter": "id",
+    "parameter": "size",
     "malicious_payload": "' OR '1'='1",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7Bid%7D?id=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10514fb50>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=invalid&size=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103814970>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
-    "endpoint": "/users/{id}",
+    "endpoint": "/users",
     "method": "GET",
-    "parameter": "id",
+    "parameter": "size",
     "malicious_payload": "<script>alert(1)</script>",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7Bid%7D?id=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105ffaf40>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=invalid&size=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d1f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
-    "endpoint": "/users/{id}",
+    "endpoint": "/users",
     "method": "GET",
-    "parameter": "id",
+    "parameter": "size",
     "malicious_payload": "`rm -rf /`",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7Bid%7D?id=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105fb8b80>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=invalid&size=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0550>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
-    "endpoint": "/users/{id}",
+    "endpoint": "/users",
     "method": "GET",
-    "parameter": "id",
+    "parameter": "size",
     "malicious_payload": "../../../../etc/passwd",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7Bid%7D?id=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105fe71f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users?page=invalid&size=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa00a0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
-    "endpoint": "/users/{id}",
+    "endpoint": "/users/{userId}",
     "method": "GET",
-    "parameter": "id",
+    "parameter": "userId",
     "malicious_payload": "' OR '1'='1",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7Bid%7D?id=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105fe7eb0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7BuserId%7D?userId=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038081f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
-    "endpoint": "/users/{id}",
+    "endpoint": "/users/{userId}",
     "method": "GET",
-    "parameter": "id",
+    "parameter": "userId",
     "malicious_payload": "<script>alert(1)</script>",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7Bid%7D?id=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105ff06d0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7BuserId%7D?userId=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102f76e50>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
-    "endpoint": "/users/{id}",
+    "endpoint": "/users/{userId}",
     "method": "GET",
-    "parameter": "id",
+    "parameter": "userId",
     "malicious_payload": "`rm -rf /`",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7Bid%7D?id=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10784a5e0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7BuserId%7D?userId=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d8b0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   },
   {
-    "endpoint": "/users/{id}",
+    "endpoint": "/users/{userId}",
     "method": "GET",
-    "parameter": "id",
+    "parameter": "userId",
     "malicious_payload": "../../../../etc/passwd",
-    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7Bid%7D?id=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10784af40>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7BuserId%7D?userId=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038140d0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "GET",
+    "parameter": "userId",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7BuserId%7D?userId=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808310>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "GET",
+    "parameter": "userId",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7BuserId%7D?userId=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808610>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "GET",
+    "parameter": "userId",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7BuserId%7D?userId=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0520>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "GET",
+    "parameter": "userId",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /users/%7BuserId%7D?userId=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102f3fa60>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "category",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d3a0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "category",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d250>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "category",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0eb0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "category",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0280>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "minPrice",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=example&minPrice=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808340>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "minPrice",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=example&minPrice=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102f634f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "minPrice",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=example&minPrice=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103814b80>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "minPrice",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=example&minPrice=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808280>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "maxPrice",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=example&maxPrice=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0880>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "maxPrice",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=example&maxPrice=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0e20>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "maxPrice",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=example&maxPrice=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d070>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "maxPrice",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=example&maxPrice=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038147f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "category",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038145b0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "category",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d280>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "category",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0a90>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "category",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038088e0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "minPrice",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=12345&minPrice=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808700>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "minPrice",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=12345&minPrice=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10382b5b0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "minPrice",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=12345&minPrice=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808ca0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "minPrice",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=12345&minPrice=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038080a0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "maxPrice",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=12345&maxPrice=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0a90>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "maxPrice",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=12345&maxPrice=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d550>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "maxPrice",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=12345&maxPrice=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103814fa0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "parameter": "maxPrice",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products?category=12345&maxPrice=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10382b370>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "parameter": "productId",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D?productId=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d850>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "parameter": "productId",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D?productId=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0af0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "parameter": "productId",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D?productId=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0190>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "parameter": "productId",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D?productId=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808d00>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "parameter": "productId",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D?productId=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10382b700>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "parameter": "productId",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D?productId=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808fd0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "parameter": "productId",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D?productId=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808730>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "parameter": "productId",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D?productId=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa04f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "parameter": "productId",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102f3fb20>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "parameter": "productId",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d790>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "parameter": "productId",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10382bd30>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "parameter": "productId",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103814070>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "parameter": "productId",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d760>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "parameter": "productId",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0160>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "parameter": "productId",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038087c0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "parameter": "productId",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808310>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "parameter": "productId",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102f634f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "parameter": "productId",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808c10>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "parameter": "productId",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0820>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "parameter": "productId",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102f3fb20>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "parameter": "productId",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103814d60>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "parameter": "productId",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10382b6d0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "parameter": "productId",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d1f0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "parameter": "productId",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /products/%7BproductId%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0940>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "parameter": "status",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders?status=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0b80>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "parameter": "status",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders?status=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103814070>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "parameter": "status",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders?status=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808a90>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "parameter": "status",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders?status=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10382b6d0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "parameter": "status",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders?status=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038088e0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "parameter": "status",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders?status=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103814fa0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "parameter": "status",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders?status=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102b928b0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "parameter": "status",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders?status=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0af0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "parameter": "orderId",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders/%7BorderId%7D?orderId=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10381d700>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "parameter": "orderId",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders/%7BorderId%7D?orderId=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10382bd60>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "parameter": "orderId",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders/%7BorderId%7D?orderId=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0580>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "parameter": "orderId",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders/%7BorderId%7D?orderId=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102fa0280>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "parameter": "orderId",
+    "malicious_payload": "' OR '1'='1",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders/%7BorderId%7D?orderId=%27+OR+%271%27%3D%271 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1038146a0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "parameter": "orderId",
+    "malicious_payload": "<script>alert(1)</script>",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders/%7BorderId%7D?orderId=%3Cscript%3Ealert%281%29%3C%2Fscript%3E (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808ca0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "parameter": "orderId",
+    "malicious_payload": "`rm -rf /`",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders/%7BorderId%7D?orderId=%60rm+-rf+%2F%60 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10382b8e0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "finding": "Error during security test"
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "parameter": "orderId",
+    "malicious_payload": "../../../../etc/passwd",
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /orders/%7BorderId%7D?orderId=..%2F..%2F..%2F..%2Fetc%2Fpasswd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x103808e20>: Failed to establish a new connection: [Errno 61] Connection refused'))",
     "finding": "Error during security test"
   }
 ]

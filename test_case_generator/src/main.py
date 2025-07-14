@@ -1,6 +1,3 @@
-# from utils import load_api_spec
-# from generator import build_test_case
-
 from test_case_generator.src.utils import load_api_spec
 from test_case_generator.src.generator import build_test_case
 import json
