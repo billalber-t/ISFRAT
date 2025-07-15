@@ -1,10 +1,10 @@
-from fastapi import APIRouter, UploadFile, Form
+from fastapi import APIRouter, UploadFile, Form, Query
 from pathlib import Path
 from datetime import datetime
 
 from app.services import test_case_generation, anomaly_detection, security_analysis
 from app.db.session import SessionLocal
-from app.db.models import TestRun, TestResult
+from app.db.models import TestRun, TestResult, TestCase
 
 router = APIRouter()
 
@@ -91,15 +91,108 @@ async def history():
     ]
 
 
+# @router.get("/results/{run_id}")
+# async def get_results(run_id: int):
+#     session = SessionLocal()
+#     results = session.query(TestResult).filter(TestResult.test_run_id == run_id).all()
+#     session.close()
+#     return [
+#         {
+#             "engine": res.engine,
+#             "result": res.result,
+#             "created_at": res.created_at
+#         } for res in results
+#     ]
+
 @router.get("/results/{run_id}")
 async def get_results(run_id: int):
     session = SessionLocal()
     results = session.query(TestResult).filter(TestResult.test_run_id == run_id).all()
     session.close()
-    return [
-        {
-            "engine": res.engine,
-            "result": res.result,
-            "created_at": res.created_at
-        } for res in results
-    ]
+    return {
+        "run_id": run_id,
+        "results": [
+            {
+                "engine": res.engine,
+                "result": res.result,
+                "created_at": res.created_at.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            for res in results
+        ]
+    }
+
+
+# @router.get("/test-cases/{run_id}")
+# async def get_test_cases(run_id: int, engine: str = Query(...)):
+#     """
+#     Get test cases for a given run_id and engine.
+#     Currently only 'test_case_generation' is supported.
+#     """
+#     if engine != "test_case_generation":
+#         raise HTTPException(
+#             status_code=400,
+#             detail=f"Engine '{engine}' does not generate test cases. Only 'test_case_generation' is supported."
+#         )
+
+#     session = SessionLocal()
+#     test_cases = session.query(TestCase).filter(TestCase.test_run_id == run_id).all()
+#     session.close()
+
+#     return {
+#         "run_id": run_id,
+#         "engine": engine,
+#         "test_cases": [
+#             {
+#                 "id": tc.id,
+#                 "endpoint": tc.endpoint,
+#                 "method": tc.method,
+#                 "type": tc.type,
+#                 "payload": tc.payload,
+#                 "created_at": tc.created_at.strftime("%Y-%m-%d %H:%M:%S")
+#             }
+#             for tc in test_cases
+#         ]
+#     }
+
+
+@router.get("/test-cases/{run_id}")
+async def get_test_cases_grouped_by_engine(run_id: int):
+    session = SessionLocal()
+
+    # Check if the run exists
+    run = session.query(TestRun).filter_by(id=run_id).first()
+    if not run:
+        session.close()
+        raise HTTPException(status_code=404, detail=f"TestRun with id {run_id} not found")
+
+    # Get all test results for the run
+    results = session.query(TestResult).filter_by(test_run_id=run_id).all()
+    if not results:
+        session.close()
+        raise HTTPException(status_code=404, detail=f"No test results found for run_id {run_id}")
+
+    # Prepare mapping engine -> list of test_cases
+    data = {}
+
+    for result in results:
+        engine = result.engine
+        test_cases = (
+            session.query(TestCase)
+            .filter_by(test_run_id=run_id)
+            .all()
+        )
+        # Since test_cases table does not have engine info, associate all to each engine
+        # (you might want to add engine info to test_cases table in the future)
+        data[engine] = [
+            {
+                "endpoint": tc.endpoint,
+                "method": tc.method,
+                "type": tc.type,
+                "payload": tc.payload,
+                "created_at": tc.created_at,
+            }
+            for tc in test_cases
+        ]
+
+    session.close()
+    return {"run_id": run_id, "test_cases_by_engine": data}
