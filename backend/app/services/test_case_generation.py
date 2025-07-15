@@ -13,7 +13,12 @@ if str(ISFRAT_ROOT) not in sys.path:
     sys.path.insert(0, str(ISFRAT_ROOT))
 
 
-def run():
+# def run(test_run_id:int):
+#     from test_case_generator.src.main import main
+#     main()
+#     return "Test case generation completed."
+
+def run(test_run_id: int):
     from test_case_generator.src.main import main
-    main()
-    return "Test case generation completed."
+    main(test_run_id)
+    return f"✅ Test case generation completed and stored with test_run_id={test_run_id}."

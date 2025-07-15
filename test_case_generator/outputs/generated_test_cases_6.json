@@ -1,0 +1,176 @@
+[
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "page": 68,
+      "size": 4
+    }
+  },
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "page": "invalid",
+      "size": "invalid"
+    }
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "userId": "example"
+    }
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "userId": 12345
+    }
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "category": "example",
+      "minPrice": null,
+      "maxPrice": null
+    }
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "category": 12345,
+      "minPrice": null,
+      "maxPrice": null
+    }
+  },
+  {
+    "endpoint": "/products",
+    "method": "POST",
+    "type": "valid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/products",
+    "method": "POST",
+    "type": "invalid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "productId": "example"
+    }
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "productId": 12345
+    }
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "type": "valid",
+    "payload": {
+      "productId": "example"
+    }
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "PUT",
+    "type": "invalid",
+    "payload": {
+      "productId": 12345
+    }
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "type": "valid",
+    "payload": {
+      "productId": "example"
+    }
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "type": "invalid",
+    "payload": {
+      "productId": 12345
+    }
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "status": "shipped"
+    }
+  },
+  {
+    "endpoint": "/orders",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "status": 12345
+    }
+  },
+  {
+    "endpoint": "/orders",
+    "method": "POST",
+    "type": "valid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/orders",
+    "method": "POST",
+    "type": "invalid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "orderId": "example"
+    }
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "orderId": 12345
+    }
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "PATCH",
+    "type": "valid",
+    "payload": {
+      "orderId": "example"
+    }
+  },
+  {
+    "endpoint": "/orders/{orderId}",
+    "method": "PATCH",
+    "type": "invalid",
+    "payload": {
+      "orderId": 12345
+    }
+  }
+]
