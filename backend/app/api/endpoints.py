@@ -4,9 +4,7 @@ from datetime import datetime
 
 from app.services import test_case_generation, anomaly_detection, security_analysis
 from app.db.session import SessionLocal
-from app.db.models import TestRun, TestCase, TestResult
-
-
+from app.db.models import TestRun, TestResult
 
 router = APIRouter()
 
@@ -44,39 +42,39 @@ async def run_tests(
     session.add(run)
     session.commit()
 
+    run_id = run.id  # ✅ capture here before session.close()
+
     results = {}
 
     if tcg:
-        results["test_case_generation"] = test_case_generation.run(test_run_id=run.id)
+        results["test_case_generation"] = test_case_generation.run(test_run_id=run_id)
         session.add(TestResult(
-            test_run_id=run.id,
-            endpoint="ALL",
-            test_type="TCG",
+            test_run_id=run_id,
+            engine="test_case_generation",
             result="COMPLETED"
         ))
 
     if adm:
         results["anomaly_detection"] = anomaly_detection.run()
         session.add(TestResult(
-            test_run_id=run.id,
-            endpoint="ALL",
-            test_type="ADM",
+            test_run_id=run_id,
+            engine="anomaly_detection",
             result="COMPLETED"
         ))
 
     if sam:
         results["security_analysis"] = security_analysis.run()
         session.add(TestResult(
-            test_run_id=run.id,
-            endpoint="ALL",
-            test_type="SAM",
+            test_run_id=run_id,
+            engine="security_analysis",
             result="COMPLETED"
         ))
 
     session.commit()
     session.close()
 
-    return {"run_id": run.id, "results": results}
+    return {"run_id": run_id, "results": results}
+
 
 
 @router.get("/history")
@@ -100,8 +98,8 @@ async def get_results(run_id: int):
     session.close()
     return [
         {
-            "endpoint": res.endpoint,
-            "test_type": res.test_type,
-            "result": res.result
+            "engine": res.engine,
+            "result": res.result,
+            "created_at": res.created_at
         } for res in results
     ]
