@@ -1,0 +1,130 @@
+[
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "type": "valid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/users",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/users",
+    "method": "POST",
+    "type": "valid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/users",
+    "method": "POST",
+    "type": "invalid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "userId": 83
+    }
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "userId": "invalid"
+    }
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "PUT",
+    "type": "valid",
+    "payload": {
+      "userId": 35
+    }
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "PUT",
+    "type": "invalid",
+    "payload": {
+      "userId": "invalid"
+    }
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "DELETE",
+    "type": "valid",
+    "payload": {
+      "userId": 49
+    }
+  },
+  {
+    "endpoint": "/users/{userId}",
+    "method": "DELETE",
+    "type": "invalid",
+    "payload": {
+      "userId": "invalid"
+    }
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "type": "valid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/products",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/products",
+    "method": "POST",
+    "type": "valid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/products",
+    "method": "POST",
+    "type": "invalid",
+    "payload": {}
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "type": "valid",
+    "payload": {
+      "productId": 39
+    }
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "GET",
+    "type": "invalid",
+    "payload": {
+      "productId": "invalid"
+    }
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "type": "valid",
+    "payload": {
+      "productId": 23
+    }
+  },
+  {
+    "endpoint": "/products/{productId}",
+    "method": "DELETE",
+    "type": "invalid",
+    "payload": {
+      "productId": "invalid"
+    }
+  }
+]

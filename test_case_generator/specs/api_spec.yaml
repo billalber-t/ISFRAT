@@ -21,40 +21,6 @@ paths:
       responses:
         '200':
           description: OK
-  /users/today:
-    get:
-      summary: Get list of users
-      parameters:
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: integer
-        - name: size
-          in: query
-          required: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: OK
-    /users/projections:
-    get:
-      summary: Get list of users
-      parameters:
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: integer
-        - name: size
-          in: query
-          required: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: OK
 
   /users/{userId}:
     get:
